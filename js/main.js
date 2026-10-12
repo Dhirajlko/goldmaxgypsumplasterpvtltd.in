@@ -548,6 +548,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       }, 800);
     });
+  }
+
   /* ==========================================================================
      10. Interactive Before/After Finish Comparison Slider
      ========================================================================== */
@@ -560,6 +562,32 @@ document.addEventListener('DOMContentLoaded', () => {
       const val = e.target.value;
       baAfterLayer.style.width = `${val}%`;
       baHandle.style.left = `${val}%`;
+    });
+  }
+
+  /* ==========================================================================
+     11. Interactive Hero Pack Switcher
+     ========================================================================== */
+  const heroPackImg = document.getElementById('heroPackImg');
+  const packSwitchBtns = document.querySelectorAll('.pack-switch-btn');
+
+  if (heroPackImg && packSwitchBtns.length > 0) {
+    packSwitchBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        packSwitchBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const newSrc = btn.getAttribute('data-pack');
+        if (newSrc) {
+          heroPackImg.style.opacity = '0.2';
+          heroPackImg.style.transform = 'scale(0.96)';
+          setTimeout(() => {
+            heroPackImg.src = newSrc;
+            heroPackImg.style.opacity = '1';
+            heroPackImg.style.transform = 'scale(1)';
+          }, 180);
+        }
+      });
     });
   }
 
