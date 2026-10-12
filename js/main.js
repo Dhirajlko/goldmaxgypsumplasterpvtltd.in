@@ -247,8 +247,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      4. Product Filter Tabs
      ========================================================================== */
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const productCards = document.querySelectorAll('.product-card');
+  const filterBtns = document.querySelectorAll('.filter-btn, .filter-btn-ind');
+  const productCards = document.querySelectorAll('.product-card, .product-card-ind');
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -472,10 +472,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      8. FAQ Accordion Toggle
      ========================================================================== */
-  const faqItems = document.querySelectorAll('.faq-item');
+  const faqItems = document.querySelectorAll('.faq-item, .faq-card-ind');
 
   faqItems.forEach(item => {
-    const questionBtn = item.querySelector('.faq-question');
+    const questionBtn = item.querySelector('.faq-question, .faq-question-ind');
+    if (!questionBtn) return;
     questionBtn.addEventListener('click', () => {
       const isActive = item.classList.contains('active');
       
