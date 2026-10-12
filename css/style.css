@@ -1619,6 +1619,305 @@ img {
 }
 
 /* ==========================================================================
+   Before / After Interactive Wall Comparison Slider
+   ========================================================================== */
+.before-after-box {
+  margin-top: 3.5rem;
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid #e2e8f0;
+}
+
+.ba-header {
+  margin-bottom: 1.8rem;
+}
+
+.ba-header h3 {
+  font-size: 1.55rem;
+  color: var(--primary-navy);
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.ba-header h3 i {
+  color: var(--gold-primary);
+}
+
+.ba-header p {
+  color: var(--gypsum-muted);
+  font-size: 0.92rem;
+}
+
+.ba-slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  user-select: none;
+}
+
+.ba-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ba-before {
+  z-index: 1;
+}
+
+.ba-after {
+  z-index: 2;
+  width: 50%;
+  overflow: hidden;
+  border-right: 3px solid var(--gold-accent);
+}
+
+.ba-surface {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+/* Surface 1: Conventional Rough Cement Wall */
+.surface-cement {
+  background: linear-gradient(135deg, #475569 0%, #334155 50%, #1e293b 100%);
+  background-image: 
+    radial-gradient(#64748b 1px, transparent 1px),
+    radial-gradient(#475569 1px, transparent 1px);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px;
+  color: #f1f5f9;
+}
+
+/* Surface 2: Goldmax Luminous Mirror Plaster */
+.surface-goldmax {
+  width: 100%;
+  min-width: 1200px; /* prevent squishing of background content */
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 40%, #fefce8 100%);
+  color: var(--primary-navy);
+  box-shadow: inset 0 0 80px rgba(251, 191, 36, 0.08);
+}
+
+.surface-badge {
+  display: inline-block;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-sm);
+  max-width: fit-content;
+}
+
+.badge-before {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.badge-after {
+  background: rgba(217, 119, 6, 0.15);
+  color: var(--primary-navy);
+  border: 1px solid rgba(217, 119, 6, 0.4);
+}
+
+.surface-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 320px;
+}
+
+.warning-tag {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  color: #fecaca;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.warning-tag i {
+  color: #ef4444;
+}
+
+.success-tag {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  color: var(--primary-navy);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.success-tag i {
+  color: var(--gold-primary);
+}
+
+/* Slider Drag Handle */
+.ba-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  pointer-events: none;
+  z-index: 10;
+  transform: translateX(-50%);
+}
+
+.handle-line {
+  width: 100%;
+  height: 100%;
+  background: var(--gold-accent);
+}
+
+.handle-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  background: var(--primary-navy);
+  color: var(--gold-accent);
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+  transition: transform var(--transition-fast);
+}
+
+.ba-slider-wrapper:hover .handle-circle {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.ba-range-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: ew-resize;
+  z-index: 20;
+}
+
+/* ==========================================================================
+   5-Step Application Process Timeline
+   ========================================================================== */
+.process-section {
+  background: #ffffff;
+  position: relative;
+}
+
+.process-timeline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.step-card {
+  background: var(--gypsum-cream);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.4rem;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.step-card:hover {
+  transform: translateY(-6px);
+  background: #ffffff;
+  border-color: var(--gold-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.step-number {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: rgba(217, 119, 6, 0.18);
+  line-height: 1;
+}
+
+.step-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%);
+  color: var(--gold-primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid rgba(217, 119, 6, 0.25);
+}
+
+.step-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.6rem;
+  color: var(--primary-navy);
+}
+
+.step-card p {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+@media (max-width: 1024px) {
+  .process-timeline {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .process-timeline {
+    grid-template-columns: 1fr;
+  }
+  .ba-slider-wrapper {
+    height: 440px;
+  }
+  .surface-goldmax {
+    min-width: 600px;
+  }
+}
+
+/* ==========================================================================
    Applications Grid
    ========================================================================== */
 .app-grid {

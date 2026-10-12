@@ -547,6 +547,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       }, 800);
     });
+  /* ==========================================================================
+     10. Interactive Before/After Finish Comparison Slider
+     ========================================================================== */
+  const baRangeInput = document.getElementById('baRangeInput');
+  const baAfterLayer = document.getElementById('baAfterLayer');
+  const baHandle = document.getElementById('baHandle');
+
+  if (baRangeInput && baAfterLayer && baHandle) {
+    baRangeInput.addEventListener('input', (e) => {
+      const val = e.target.value;
+      baAfterLayer.style.width = `${val}%`;
+      baHandle.style.left = `${val}%`;
+    });
   }
 
 });
